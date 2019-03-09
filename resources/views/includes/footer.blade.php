@@ -1,14 +1,16 @@
-<div class="row" style="position:fixed;">
-    <nav class="container  navbar fixed-bottom navbar-light bg-faded" style="background: #1e1e1e; height: 50px;">
-    <div class="col-md-4">
-        
+<footer class="py-5 bg-dark">
+
+  <!-- /.container -->
+  <div class="footer">
+    <div class="container text-center">
+      <a href="#"><i class="fa fa-facebook"></i></a>
+      <a href="#"><i class="fa fa-twitter"></i></a>
+      <a href="#"><i class="fa fa-linkedin"></i></a>
+      <a href="#"><i class="fa fa-google-plus"></i></a>
+      <a href="#"><i class="fa fa-skype"></i></a>
     </div>
-    <div class="col-md-4">
-        <marquee behavior="alternate" style="margin-top: 30px;"><p><kbd><b style="color: white; font-size: 15px;">&copy; Tech Hunters 2K19</b></kbd></p></marquee>
-    </div>
-    <div class="col-md-4">
-       
-        
-    </div>
-    </nav>
-</div>
+  </div>
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+  </div>
+</footer>

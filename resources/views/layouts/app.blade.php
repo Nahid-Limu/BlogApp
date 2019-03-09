@@ -12,7 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-     
+
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -26,15 +26,18 @@
 </head>
 <body>
     <div id="app">
-        
+
 
         <main class="py-4">
             @yield('content')
-            
-            
+
+
         </main>
     </div>
 </body>
+<footer>
+    @yield('footer')
+</footer>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>

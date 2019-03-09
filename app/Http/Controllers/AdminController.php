@@ -9,6 +9,10 @@ use App\Post;
 
 class AdminController extends Controller
 {
+  public function login()
+  {
+    return view('admin.login');
+  }
     public function viewPost()
     {
         return view('admin.post');

@@ -1,4 +1,4 @@
-@extends('layouts.appAdmin') 
+@extends('layouts.appAdmin')
 @section('content')
 
 <div class="jumbotron">
@@ -15,15 +15,15 @@
     <table class="table table-bordered">
     <tr>
             <td>
-                <label for="">Post Title:</label>
+                <label for="postTitle">Post Title:</label>
             </td>
             <td>
-                <input class="form-control" type="text" name="postTitle" required>
+                <input class="form-control" type="text" name="postTitle" id="postTitle" required>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="">Post Description:</label>
+                <label for="postDescription">Post Description:</label>
             </td>
             <td>
                 <textarea cols="110" rows="10" type="text" name="postDescription" id="postDescription"></textarea>
@@ -31,13 +31,13 @@
         </tr>
         <tr>
             <td>
-                <label for="">Ulplode Image:</label>
+                <label for="image">Upload Image:</label>
             </td>
             <td>
-                <input class="form-control" type="file" name="image">
+                <input class="form-control" type="file" name="image" id="image">
             </td>
         </tr>
-    
+
     </table>
     <button class="btn btn-info offset-6" type="submit">Add Post</button>
     </form>
@@ -47,7 +47,7 @@
 @section('script')
     <script>
             //text eiditior
-            //tinymce.init({selector: 'textarea'}); 
+            //tinymce.init({selector: 'textarea'});
 
             //flash msg
             $("#successMessage").fadeTo(1000, 500).slideUp(500, function(){
@@ -55,4 +55,3 @@
             });
     </script>
 @endsection
-

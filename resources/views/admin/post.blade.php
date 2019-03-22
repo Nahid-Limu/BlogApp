@@ -1,7 +1,9 @@
+@if (Session::has('userId'))
+
 @extends('layouts.appAdmin')
 @section('content')
 
-<div class="jumbotron">
+<div class="container jumbotron">
         @if(Session::has('message'))
         <div id="successMessage" class="alert alert-dismissible alert-success" style="display: inline-block; float: right; ">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -9,11 +11,11 @@
         </div>
         @endif
 
-    <h1 class="">Add New Posts</h1>
+    <h1 class="text-center text-success">Add New Posts</h1>
     <form action=" {{ route('addPost') }} " method="POST" enctype="multipart/form-data">
         @csrf
-    <table class="table table-bordered">
-    <tr>
+    <table class="table table-bordered table-responsive">
+    <tr >
             <td>
                 <label for="postTitle">Post Title:</label>
             </td>
@@ -55,3 +57,7 @@
             });
     </script>
 @endsection
+
+@else
+<script>window.location = "/admin";</script>
+@endif

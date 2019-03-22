@@ -1,3 +1,5 @@
+@if (Session::has('userId'))
+
 @extends('layouts.appAdmin') 
 @section('content')
 
@@ -29,9 +31,9 @@
                           <div class="card-body-icon">
                             <i class="fas fa-fw fa-comments"></i>
                           </div>
-                          <div class="mr-5">26 New Messages!</div>
+                          <div class="mr-5">{{$totalpost}} Post</div>
                         </div>
-                        <a class="card-footer text-white clearfix small z-1" href="#">
+                        <a class="card-footer text-white clearfix small z-1" href="{{ route('adminViewPost') }}">
                           <span class="float-left">View Details</span>
                           <span class="float-right">
                             <i class="fas fa-angle-right"></i>
@@ -88,12 +90,14 @@
                       </div>
                     </div>
                   </div>
-          
+                  <a href="{{ route('logout') }}">Logout</a>
                   <!-- Area Chart Example-->
                   <div class="card mb-3">
                     <div class="card-header">
                       <i class="fas fa-chart-area"></i>
-                      Area Chart Example</div>
+                      Area Chart 
+                      <h1>{{ Session::get('userName') }}</h1>
+                    </div>
                     <div class="card-body">
                       <canvas id="myAreaChart" width="100%" height="30"></canvas>
                       hello
@@ -125,3 +129,6 @@
     
 @endsection
 
+@else
+<script>window.location = "/admin";</script>
+@endif

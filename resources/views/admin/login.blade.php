@@ -1,44 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link href="{{ asset('css/adminLogin.css') }}" rel="stylesheet">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rydobd.com</title>
+  <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+</head>
+<body>
+    @if(Session::has('message'))
+    <div id="successMessage" class="alert alert-dismissible alert-success" style="display: inline-block; float: right; ">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong> {{ Session::get('message') }} </strong>
+    </div>
+    @endif
+<div class="login-page">  
+<div class="panda">
+  <div class="ear"></div>
+  <div class="face">
+    <div class="eye-shade"></div>
+    <div class="eye-white">
+      <div class="eye-ball"></div>
+    </div>
+    <div class="eye-shade rgt"></div>
+    <div class="eye-white rgt">
+      <div class="eye-ball"></div>
+    </div>
+    <div class="nose"></div>
+    <div class="mouth"></div>
+  </div>
+  <div class="body"> </div>
+  <div class="foot">
+    <div class="finger"></div>
+  </div>
+  <div class="foot rgt">
+    <div class="finger"></div>
+  </div>
+</div>
+<form method="POST" action="{{ route('login') }}" class="login-form">
+    @csrf
+  <div class="hand"></div>
+  <div class="hand rgt"></div>
+  <h1>Admin Login</h1>
+  <div class="form-group">
+    <input class="form-control" type="email" name="email" required="required"/>
+    <label class="form-label">Email</label>
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="password" name="password" id="password" required="required" />
+    <label class="form-label">Password</label>
+    <p class="alert">Invalid Credentials..!!</p>
+    <button class="btn">Login </button>
+  </div>
+</form>
+</div>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script>
+  $('#password').focusin(function(){
+  $('form').addClass('up')
+});
+$('#password').focusout(function(){
+  $('form').removeClass('up')
+});
 
-    <style>
-      img {
-        border-radius: 50%;
-        width: 150px;
-        height: 150px;
+// Panda Eye move
+$(document).on( "mousemove", function( event ) {
+  var dw = $(document).width() / 15;
+  var dh = $(document).height() / 15;
+  var x = event.pageX/ dw;
+  var y = event.pageY/ dh;
+  $('.eye-ball').css({
+    width : x,
+    height : y
+  });
+});
 
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-      }
-    </style>
-  </head>
-  <body>
-    <h1 style="text-align:center; color:red; font-family: Ravie;">Wecome Admin</h1>
-    <img  src=" {{ asset('img').'/'.'img_avatar.png' }} " alt="">
-    
-    <form method="post" action="index.html" class="login">
+// validation
 
-        <p>
-          <label for="login">Email:</label>
-          <input type="text" name="login" id="login" value="name@example.com">
-        </p>
 
-        <p>
-          <label for="password">Password:</label>
-          <input type="password" name="password" id="password" value="4815162342">
-        </p>
+$('.btn').click(function(){
+  $('form').addClass('wrong-entry');
+    setTimeout(function(){ 
+       $('form').removeClass('wrong-entry');
+     },3000 );
+});
 
-        <p class="login-submit">
-          <button type="submit" class="login-button">Login</button>
-        </p>
 
-        <p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
-      </form>
+//flash msg
+$("#successMessage").fadeTo(1000, 500).slideUp(500, function(){
+  $("#successMessage").alert('close');
+});
 
-  </body>
+</script>
+</body>
 </html>

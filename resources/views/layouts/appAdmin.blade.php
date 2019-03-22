@@ -15,7 +15,7 @@
 
 
     <!-- Styles -->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css">
     {{--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">  --}}
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
@@ -24,7 +24,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
-    
     
     @yield('css')
 
@@ -39,7 +38,10 @@
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
                 <div class="sidebar-brand">
-                    <a href="#">pro sidebar</a>
+                    <a href="#" style="text-decoration: none;">
+                        <i class="fa fa-user" aria-hidden="true" style="color: red;"></i> 
+                        Welcome {{ Session::get('userName') }}
+                    </a>
                     <div id="close-sidebar">
                         <i class="fas fa-times"></i>
                     </div>
@@ -65,17 +67,17 @@
                             <span>General</span>
                         </li>
                         <li class="sidebar-dropdown active">
-                            <a href="#">
-              <i class="fa fa-tachometer-alt"></i>
-              <span>Dashboard</span>
-              <span class="badge badge-pill badge-warning">New</span>
-            </a>
-                            <div class="sidebar-submenu" style="display:block;">
+                            <a href="{{ route('dashboard')}}">
+                                <i class="fa fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                                <span class="badge badge-pill badge-warning"></span>
+                            </a>
+                            {{-- <div class="sidebar-submenu" style="display:block;">
                                 <ul>
                                     <li>
                                         <a href="#">Dashboard 1
-                    <span class="badge badge-pill badge-success">Pro</span>
-                  </a>
+                                        <span class="badge badge-pill badge-success">Pro</span>
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="#">Dashboard 2</a>
@@ -84,95 +86,27 @@
                                         <a href="#">Dashboard 3</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> --}}
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
-              <i class="fa fa-shopping-cart"></i>
-              <span>E-commerce</span>
-              <span class="badge badge-pill badge-danger">3</span>
-            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Products
-
-                  </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Orders</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Credit cart</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>E-commerce</span>
+                            <span class="badge badge-pill badge-danger">3</span>
+                            </a>
+                            
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
-              <i class="far fa-gem"></i>
-              <span>Components</span>
-            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">General</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Panels</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Tables</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Icons</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Forms</a>
-                                    </li>
-                                </ul>
-                            </div>
+                                <i class="far fa-gem"></i>
+                                <span>Components</span>
+                            </a>
+                            
                         </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-              <i class="fa fa-chart-line"></i>
-              <span>Charts</span>
-            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Pie chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Line chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Bar chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Histogram</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-              <i class="fa fa-globe"></i>
-              <span>Maps</span>
-            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Google maps</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Open street map</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        
+                        
                         <li class="header-menu">
-                            <span>Extra</span>
+                            <span>Profile</span>
                         </li>
                         <li>
                             <a href="#">
@@ -207,13 +141,13 @@
         <i class="fa fa-envelope"></i>
         <span class="badge badge-pill badge-success notification">7</span>
       </a>
-                <a href="#">
-        <i class="fa fa-cog"></i>
-        <span class="badge-sonar"></span>
-      </a>
-                <a href="#">
-        <i class="fa fa-power-off"></i>
-      </a>
+        <a href="#">
+            <i class="fa fa-cog"></i>
+            <span class="badge-sonar"></span>
+        </a>
+        <a href="{{ route('logout') }}">
+            <i class="fa fa-power-off"></i>
+        </a>
             </div>
         </nav>
         <!-- sidebar-wrapper  -->
@@ -231,6 +165,7 @@
 
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
 {{--  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  --}}
 {{--  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  --}}
 {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  --}}

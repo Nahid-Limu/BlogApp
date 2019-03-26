@@ -9,6 +9,7 @@ use App\Post;
 use App\User;
 use App\ImageUpload;
 use Auth;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class AdminController extends Controller
 {
@@ -20,8 +21,9 @@ class AdminController extends Controller
     public function viewDashboard()
     {
         $totalpost = Post::count();
+        $totalImage = ImageUpload::count();
         //dd($post);
-        return view('admin.dashboard', compact('totalpost'));
+        return view('admin.dashboard', compact('totalpost', 'totalImage'));
     }
 
     public function viewPost()
@@ -68,14 +70,34 @@ class AdminController extends Controller
        $postTitle = $request->postTitle;
        $postDescription = $request->postDescription;
 
-       //$imageName = time().'.'.request()->image->getClientOriginalExtension();
-       $imageName = time().'-'.request()->image->getClientOriginalName();
-       request()->image->move(public_path('images'), $imageName);
+        //$imageName = time().'.'.request()->image->getClientOriginalExtension();
+        //    $imageName = time().'-'.request()->image->getClientOriginalName();
+        //    request()->image->move(public_path('images'), $imageName);
+
+
+        // $image       = $request->file('image');
+        // $filename    = time().'-'.$image->getClientOriginalName();
+
+        // $image_resize = Image::make($image->getRealPath());              
+        // $image_resize->resize(300, 300);
+        // $image_resize->save(public_path('images/' .$filename));
+
+
+        $image = $request->file('image');
+
+        $filename =  ($image->getClientOriginalName());
+
+        $path = public_path('images/' . $filename);
+
+        Image::make($image->getRealPath())->resize(300, 300)->save($path);
+
+
+
        //echo $imageName;
 
        $post->post_title = $postTitle;
        $post->post_description = $postDescription;
-       $post->image = $imageName;
+       $post->image = $filename;
 
        $post->save();
 
@@ -84,6 +106,32 @@ class AdminController extends Controller
 
 
     }
+
+
+    public function fileStore(Request $request)
+    {
+        $image = $request->file('file');
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('images'),$imageName);
+        
+        $imageUpload = new ImageUpload();
+        $imageUpload->image = $imageName;
+        $imageUpload->save();
+        return response()->json(['success'=>$imageName]);
+    }
+    public function fileDestroy(Request $request)
+    {
+        $filename =  $request->get('filename');
+        ImageUpload::where('image',$filename)->delete();
+        $path=public_path().'/images/'.$filename;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        return $filename;  
+    }
+
+
+
 
     public function adminViewPost()
     {
@@ -124,25 +172,28 @@ class AdminController extends Controller
         return Redirect::back()->with('message', 'Post Update Successfully');
     }
 
-    public function fileStore(Request $request)
+
+    public function adminViewGallery()
     {
-        $image = $request->file('file');
-        $imageName = $image->getClientOriginalName();
-        $image->move(public_path('images'),$imageName);
-        
-        $imageUpload = new ImageUpload();
-        $imageUpload->image = $imageName;
-        $imageUpload->save();
-        return response()->json(['success'=>$imageName]);
+        $gallery = ImageUpload::orderBy('id', 'DESC')->paginate(6);
+        //echo $value = str_limit('$post->post_description', 7);
+        //dd($posts);
+        return view('admin.editGallery')->with('gallery',$gallery);
+    
     }
-    public function fileDestroy(Request $request)
+
+
+    public function deleteGalleryImage($id)
     {
-        $filename =  $request->get('filename');
-        ImageUpload::where('image',$filename)->delete();
-        $path=public_path().'/images/'.$filename;
-        if (file_exists($path)) {
-            unlink($path);
+        $gallery = ImageUpload::find($id);
+        if ($gallery) {
+            $gallery->delete();
+            return Redirect::back()->with('message', 'Post Delete Successfully....!!!');
+        } else {
+            return Redirect::back()->with('message', 'Post not found');
         }
-        return $filename;  
+        
     }
+
+    
 }

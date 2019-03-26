@@ -11,7 +11,7 @@
         </div>
         @endif
 
-    <h1 class="text-center text-success">Add New Posts</h1>
+    <h1 class="text-center text-info">Add New Posts</h1>
     <form action=" {{ route('addPost') }} " method="POST" enctype="multipart/form-data">
         @csrf
     <table class="table table-bordered table-responsive">

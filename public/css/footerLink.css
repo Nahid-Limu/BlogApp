@@ -1,20 +1,23 @@
-.footer {
-    background: #061D25;
-    padding: 10px 0;
-  }
-
-  .footer a {
-    color: #70726F;
-    font-size: 20px;
-    padding: 10px;
-    border-right: 1px solid #70726F;
-    transition: all .5s ease;
-  }
-
-  .footer a:first-child {
-    border-left: 1px solid #70726F;
-  }
-
-  .footer a:hover {
-    color: white;
-  }
+.fa{
+  color: white;
+  font-size:30px;
+  margin:5px;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.fa:hover{
+  font-size: 40px;
+  transform: rotate(45deg);
+}
+.fa-facebook:hover{
+  color:#3C5A99;
+}
+.fa-twitter:hover{
+  color:#12c3e2;
+}
+.fa-youtube:hover{
+  color:red;
+}
+.fa-linkedin:hover{
+  color:#12c3e2;
+}

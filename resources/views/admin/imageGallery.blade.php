@@ -13,7 +13,7 @@
 
         <div class="container">
        
-            <h3 class="jumbotron">Multiple Images Upload In Gallery</h3>
+            <h3 class="jumbotron text-center text-info">Multiple Images Upload In Gallery</h3>
             <form method="post" action="{{url('image/upload/store')}}" enctype="multipart/form-data" 
                           class="dropzone" id="dropzone">
             @csrf

@@ -47,9 +47,9 @@
                           <div class="card-body-icon">
                             <i class="fas fa-fw fa-list"></i>
                           </div>
-                          <div class="mr-5">11 New Tasks!</div>
+                          <div class="mr-5">{{$totalImage}} Images in Gallery!</div>
                         </div>
-                        <a class="card-footer text-white clearfix small z-1" href="#">
+                        <a class="card-footer text-white clearfix small z-1" href="{{ route('adminViewGallery') }}">
                           <span class="float-left">View Details</span>
                           <span class="float-right">
                             <i class="fas fa-angle-right"></i>

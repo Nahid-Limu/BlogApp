@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>RYDOBD</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img').'/'.'title-logo.png' }}" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,7 +24,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
+    
     
     @yield('css')
 
@@ -89,17 +90,17 @@
                             </div> --}}
                         </li>
                         <li class="sidebar-dropdown">
-                            <a href="#">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span>E-commerce</span>
-                            <span class="badge badge-pill badge-danger">3</span>
+                            <a href=" {{ route('post') }} ">
+                            <i class="fa fa-plus"></i>
+                            <span>Add New Post</span>
+                            {{-- <span class="badge badge-pill badge-danger">3</span> --}}
                             </a>
                             
                         </li>
                         <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="far fa-gem"></i>
-                                <span>Components</span>
+                            <a href=" {{ route('imageGallery') }} ">
+                                <i class="fa fa-upload"></i>
+                                <span>Upload Image in Gallery</span>
                             </a>
                             
                         </li>

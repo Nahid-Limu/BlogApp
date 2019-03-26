@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Rydobd.com</title>
+  <title>RYDOBD</title>
+  <link rel="icon" type="image/x-icon" href="{{ asset('img').'/'.'title-logo.png' }}" />
+
   <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 </head>
 <body>

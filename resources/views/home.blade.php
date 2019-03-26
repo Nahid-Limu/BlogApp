@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('css')
-<style>
+
+  <style>
     .myButton {
       -moz-box-shadow: 3px 4px 0px 0px #8a2a21;
       -webkit-box-shadow: 3px 4px 0px 0px #8a2a21;
@@ -42,8 +43,8 @@
       top:1px;
     }
     
-</style>
- {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">  --}}
+  </style>
+
 @endsection
 @section('content')
 
@@ -95,45 +96,150 @@
 
     @endphp
   
-    <span  class="badge badge-warning" style="text-align: center;"> {{ date('h:i A')}} </span>
+    <span  class="d-flex justify-content-center badge bg-info text-danger">
+      <marquee style="font-size: 20px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;">RYDOBD The Voice Of Panchagarh. Time: {{ date('h:i A')}}</marquee>  
+    </span>
 
 
   <h1 class="my-4 alert-success">Welcome To RYDOBD.com
       <span class="pull-right">{{ $today->day.' '.$today->format('F').' '.$today->year }}</span>
   </h1>
-  
-  <h2>Events</h2>
-  
-  <div class="row">
-      @foreach ($posts as $post)
-      <div class="col-lg-6 col-sm-6 portfolio-item">
-        <div class="row ">
-          <div class="col-md-4">
-              <div >
-                  <a href="{{ route('viewPost', $post->id) }}" ><img class="card-img-top" src=" {{ asset('images').'/'.$post->image }} " alt="no image found" style="width: 200px; height: 200px;"></a>
-              </div>
+
+  {{--  Our Free Volunteer Services  --}}
+  <div class="jumbotron bg-light">
+    <h2 class="text-center">Our Free Volunteer Services</h2>
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
+            <i class="fa fa-bars" style="font-size:60px;color:tomato;"></i>
           </div>
-          <div class="col-md-8">
-              <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="{{ route('viewPost', $post->id) }}" style="text-decoration:none;">{{ $post->post_title }}</a>
-                  </h4>
-
-                  <h6>By Admin ,<small>Publish Date: {{$post->created_at->toDateString()}}</small></h6>
-
-                  <h5>{{ str_limit($post->post_description, 100) }}</h5>
-                  
-                  <div>
-                      <a href="{{ route('viewPost', $post->id) }}" class="myButton">Read More</a>
-                  </div>
-                </div>
+          <div class="col-md-6">
+            <h4>আইজিএ</h4>
+            <h5>text</h5>
           </div>
         </div>
-          
       </div>
-      @endforeach
 
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
+              <i class="fa fa-hand-paper-o" style="font-size:48px;color:red"></i>
+          </div>
+          <div class="col-md-6">
+            <h4>অঙ্গীকার </h4>
+            <h5>text </h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
+            <i class="fa fa-cc-diners-club" style="font-size:60px;color:tomato;"></i>
+          </div>
+          <div class="col-md-6">
+            <h4>ডিজিটাল ক্লাব </h4>
+            <h5>text</h5>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div>
+      <br>
+      <br> 
+      <br>
+      <br>    
+    </div>
+    <div class="row">
+        
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6">
+              <i class="fa fa-info-circle" style="font-size:60px;color:tomato;"></i>
+            </div>
+            <div class="col-md-6">
+              <h4>তথ্যঘর </h4>
+              <h5>text</h5>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6">
+              <i class="fa fa-object-group" style="font-size:60px;color:tomato;"></i>
+            </div>
+            <div class="col-md-6">
+              <h4>এলটিপি </h4>
+              <h5>text</h5>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6">
+              <i class="fa fa-paw" style="font-size:60px;color:tomato;"></i>
+            </div>
+            <div class="col-md-6">
+              <h4>স্কিড</h4>
+              <h5>text</h5>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    
   </div>
+  {{--  Our Free Volunteer Services  --}}
+
+  {{--  Post  --}}
+  <div class = "card border-primary">
+      <div class = "card-header bg-primary">
+         <h3 class = "card-title text-center">Read All Post</h3>
+      </div>
+      
+      <div class = "card-body">
+         
+          <div class="row">
+              @foreach ($posts as $post)
+              <div class="col-lg-6 col-sm-6 portfolio-item">
+                <div class="row ">
+                  <div class="col-md-5">
+                      <div >
+                          <a href="{{ route('viewPost', $post->id) }}" ><img class="card-img-top" src=" {{ asset('images').'/'.$post->image }} " alt="no image found" style="width: 200px; height: 200px;"></a>
+                      </div>
+                  </div>
+                  <div class="col-md-7">
+                      <div class="card-body">
+                          <h4 class="card-title">
+                            <a href="{{ route('viewPost', $post->id) }}" style="text-decoration:none;">{{ $post->post_title }}</a>
+                          </h4>
+        
+                          <h6>By Admin ,<small>Publish Date: {{$post->created_at->toDateString()}}</small></h6>
+        
+                          <h5>{{ str_limit($post->post_description, 100) }}</h5>
+                          
+                          <div>
+                              <a href="{{ route('viewPost', $post->id) }}" class="myButton">Read More</a>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+                  
+              </div>
+              @endforeach
+        
+          </div>
+
+      </div>
+  </div>
+  
+
+  {{--  Post  --}}
 
   <div class="d-flex justify-content-center">
       {{ $posts->links() }}

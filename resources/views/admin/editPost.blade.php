@@ -2,8 +2,13 @@
 
 @extends('layouts.appAdmin')
 @section('content')
-
-<div class="container jumbotron">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href=" {{ route('dashboard') }} ">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Edit Post</li>
+</ol>
+<div class="">
         @if(Session::has('message'))
         <div id="successMessage" class="alert alert-dismissible alert-success" style="display: inline-block; float: right; ">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -11,31 +16,40 @@
         </div>
         @endif
 
-    <h1 class="text-center text-info">Update Posts</h1>
-    <form action="{{ route('updatePost', $post->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-    <table class="table table-bordered table-responsive">
-    <tr >
-            <td>
-                <label for="postTitle">Post Title:</label>
-            </td>
-            <td>
-                <input class="form-control" type="text" name="postTitle" id="postTitle" value="{{$post->post_title}}" required>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="postDescription">Post Description:</label>
-            </td>
-            <td>
-                <textarea cols="110" rows="10" type="text" name="postDescription" id="postDescription">{{$post->post_description}}</textarea>
-            </td>
-        </tr>
+    <div class="card card-6 border-info">
+        <div class="card-heading bg-info">
+            <h2 class="title">Update Posts</h2>
+        </div>
+        <form action=" {{ route('updatePost', $post->id) }} " method="POST" enctype="multipart/form-data">
+            @csrf
+        <div class="card-body">
+            
+                <div class="form-row">
+                    <div class="name">Post Title</div>
+                    <div class="value">
+                        <input class="input--style-6" type="text" name="postTitle" value="{{$post->post_title}}" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="name">Post Description</div>
+                    <div class="value">
+                        <div class="input-group">
+                            <textarea class="textarea--style-6" name="postDescription" placeholder="">{{$post->post_description}}</textarea>
+                        </div>
+                    </div>
+                </div>
 
-    </table>
-    <button class="btn btn-info offset-6" type="submit">Update Post</button>
-    </form>
+            
+        </div>
+        <div class="card-footer">
+            <button class="btn btn--radius-2 btn--blue-2" type="submit"><i class="fa fa-refresh"></i> Update Post</button>
+        </div>
+        </form>
+    </div>
+
 </div>
+@include('includes.footer')
 @endsection
 
 @section('script')

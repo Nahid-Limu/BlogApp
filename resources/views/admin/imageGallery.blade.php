@@ -10,7 +10,12 @@
             <strong> {{ Session::get('message') }} </strong>
         </div>
         @endif
-
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href=" {{ route('dashboard') }} ">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Add Image</li>
+        </ol>
         <div class="container">
        
             <h3 class="jumbotron text-center text-info">Multiple Images Upload In Gallery</h3>
@@ -21,6 +26,7 @@
         </div>
     
 </div>
+@include('includes.footer')
 @endsection
 
 @section('script')

@@ -17,13 +17,15 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css">
-    {{--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">  --}}
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    {{--  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">  --}}
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/add-post.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/grid-gallery.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/baguetteBox.css') }}" rel="stylesheet">
+    
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
     
     
     @yield('css')
@@ -98,6 +100,14 @@
                             
                         </li>
                         <li class="sidebar-dropdown">
+                            <a href=" {{ route('event') }} ">
+                            <i class="fa fa-calendar"></i>
+                            <span>Add UpComing Event</span>
+                            {{-- <span class="badge badge-pill badge-danger">3</span> --}}
+                            </a>
+                            
+                        </li>
+                        <li class="sidebar-dropdown">
                             <a href=" {{ route('imageGallery') }} ">
                                 <i class="fa fa-upload"></i>
                                 <span>Upload Image in Gallery</span>
@@ -146,7 +156,7 @@
             <i class="fa fa-cog"></i>
             <span class="badge-sonar"></span>
         </a>
-        <a href="{{ route('logout') }}">
+        <a href="{{ route('logout') }}" title="Logout">
             <i class="fa fa-power-off"></i>
         </a>
             </div>
@@ -164,16 +174,10 @@
 
 </body>
 
+
 <script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script src="{{ asset('js/baguetteBox.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
-{{--  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  --}}
-{{--  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  --}}
-{{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  --}}
-{{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>  --}}
-{{--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>  --}}
 
 <script>
     jQuery(function ($) {

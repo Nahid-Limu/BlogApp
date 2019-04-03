@@ -1,7 +1,5 @@
 @extends('layouts.app') 
 @section('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
-
 @endsection
 @section('content')
 
@@ -35,8 +33,8 @@
 
 @endsection
 @section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script>
-        baguetteBox.run('.grid-gallery', { animation: 'slideIn'});
-    </script>
+  <script>
+      baguetteBox.run('.grid-gallery', { animation: 'slideIn'});
+  </script>
 @endsection
+

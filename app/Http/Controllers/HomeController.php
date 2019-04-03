@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Event;
 use App\ImageUpload;
 class HomeController extends Controller
 {
@@ -28,6 +29,16 @@ class HomeController extends Controller
 
         return view('home')->with('posts',$posts);
     }
+
+
+    public function event()
+    {
+        $events = Event::orderBy('id', 'DESC')->paginate(6);
+
+        return view('UpComingEvent')->with('events',$events);
+    }
+
+
 
     public function imageGallery()
     {

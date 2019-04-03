@@ -1,6 +1,7 @@
 @if (Session::has('userId'))
 
 @extends('layouts.appAdmin') 
+
 @section('content')
 
 <div class="jumbotron">
@@ -61,11 +62,11 @@
                       <div class="card text-white bg-success o-hidden h-100">
                         <div class="card-body">
                           <div class="card-body-icon">
-                            <i class="fas fa-fw fa-shopping-cart"></i>
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
                           </div>
-                          <div class="mr-5">123 New Orders!</div>
+                          <div class="mr-5"> {{$totalevent}} New Events</div>
                         </div>
-                        <a class="card-footer text-white clearfix small z-1" href="#">
+                        <a class="card-footer text-white clearfix small z-1" href="{{ route('adminViewEvent') }}">
                           <span class="float-left">View Details</span>
                           <span class="float-right">
                             <i class="fas fa-angle-right"></i>
@@ -90,19 +91,19 @@
                       </div>
                     </div>
                   </div>
-                  <a href="{{ route('logout') }}">Logout</a>
+        
                   <!-- Area Chart Example-->
                   <div class="card mb-3">
                     <div class="card-header">
                       <i class="fas fa-chart-area"></i>
-                      Area Chart 
-                      <h1>{{ Session::get('userName') }}</h1>
+                      All Post In Chart 
                     </div>
                     <div class="card-body">
-                      <canvas id="myAreaChart" width="100%" height="30"></canvas>
-                      hello
+                        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                      
+              
                     </div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                    {{-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> --}}
                   </div>
           
                   <!-- DataTables Example -->
@@ -111,22 +112,41 @@
                 </div>
                 <!-- /.container-fluid -->
           
-                <!-- Sticky Footer -->
-                <footer class="sticky-footer">
-                  <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                      <span>Copyright © Your Website 2019</span>
-                    </div>
-                  </div>
-                </footer>
+                
           
               </div>
     
 </div>
+@include('includes.footer')
 @endsection
 
 @section('script')
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script>
+    window.onload = function() {
     
+    var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      title: {
+        text: "Post Statistics"
+      },
+      data: [{
+        type: "pie",
+        startAngle: 240,
+        yValueFormatString: "",
+        indexLabel: "{label} {y}",
+        dataPoints: [
+          {y: {{$totalpost}}, label: "Total Post"},
+          {y: {{$totalevent}}, label: "Total UpComing Event"},
+          {y: {{$totalImage}}, label: "Total Image in Gallery"},
+          
+        ]
+      }]
+    });
+    chart.render();
+    
+    }
+    </script>
 @endsection
 
 @else

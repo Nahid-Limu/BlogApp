@@ -2,22 +2,26 @@
 
 @extends('layouts.appAdmin')
 @section('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
 
 @endsection
 @section('content')
-
-<div class="container jumbotron">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href=" {{ route('dashboard') }} ">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Edit Gallery</li>
+</ol>
+<div class="container">
         @if(Session::has('message'))
         <div id="successMessage" class="alert alert-dismissible alert-success" style="display: inline-block; float: right; ">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong> {{ Session::get('message') }} </strong>
         </div>
         @endif
-        <h1 class="text-center text-info">Image Gallery</h1>
+        
         <!-- Page Content -->
         <section class="gallery-block grid-gallery">
-          <div class="container">
+          <div class="">
               <div class="heading">
                   <h2>Image Gallery</h2>
               </div>
@@ -27,8 +31,10 @@
                     <a class="lightbox" href="{{ asset('images').'/'. $image->image }}">
                         <img class="img-fluid image scale-on-hover" src="{{ asset('images').'/'.$image->image }}" style="width: 300px; height: 300px;">
                     </a>
-                    <a href="{{ route('deleteGalleryImage', $image->id) }}" class="btn btn-sm btn-danger">Delete</a>
+                    <div>
+                        <a href="{{ route('deleteGalleryImage', $image->id) }}" class="btn btn-sm btn-danger">Delete</a>
 
+                    </div>
                 </div>
                 @endforeach
                   
@@ -42,10 +48,10 @@
               {{ $gallery->links() }}
           </div>
 </div>
+@include('includes.footer')
 @endsection
 
 @section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script>
         baguetteBox.run('.grid-gallery', { animation: 'slideIn'});
     </script>

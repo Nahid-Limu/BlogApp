@@ -19,7 +19,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/modern-business.css') }}" rel="stylesheet">
     <link href="{{ asset('css/footerLink.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/baguetteBox.css') }}" rel="stylesheet">
     <link href="{{ asset('css/grid-gallery.css') }}" rel="stylesheet">
      
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -28,7 +28,7 @@
 
 </head>
 <body>
-    <div id="app">
+    <div id="">
 
 
         <main class="py-4">
@@ -61,7 +61,8 @@
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    
+    <script src="{{ asset('js/baguetteBox.js') }}"></script>
+
     
     {{-- <script>
         $.material.init()

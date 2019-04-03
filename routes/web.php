@@ -15,38 +15,51 @@
 //     return view('home');
 // });
 Route::get('/test', 'HomeController@test');
-//user
+
+// ---------------------------------USER------------------------------
 Route::get('/', 'HomeController@home')->name('home');
 Route::get('/viewPost/{id}', 'HomeController@viewPost')->name('viewPost');
 
+Route::get('/UpComingevents', 'HomeController@event')->name('UpComingevents');
 Route::get('/gallery', 'HomeController@imageGallery')->name('gallery');
-Route::get('/contuct', 'HomeController@contuct')->name('contuct');
 Route::get('/about', 'HomeController@about')->name('about');
 
+Route::get('/contuct', 'SendEmailController@contuct')->name('contuct');
+Route::post('/contuct/sendmail', 'SendEmailController@sendmail')->name('sendmail');
+
+// ---------------------------------ADMIN------------------------------
 //admin login
 Route::get('/admin', 'AdminController@login');
-
 Route::post('/login', 'AdminController@login_check')->name('login');
 Route::get('/logout', 'AdminController@logout')->name('logout');
 
+//dashboard
 Route::get('/dashboard', 'AdminController@viewDashboard')->name('dashboard');
 
 //add post
-Route::get('/post', 'AdminController@viewPost')->name('post');
-Route::post('/addPost', 'AdminController@addPost')->name('addPost');
-Route::get('/adminViewPost', 'AdminController@adminViewPost')->name('adminViewPost');
-Route::get('/editPost/{id}', 'AdminController@editPost')->name('editPost');
-Route::get('/deletePost/{id}', 'AdminController@deletePost')->name('deletePost');
-Route::post('/updatePost/{id}', 'AdminController@updatePost')->name('updatePost');
+Route::get('/post/add', 'PostController@viewPost')->name('post');
+Route::post('/addPost', 'PostController@addPost')->name('addPost');
+Route::get('/admin/ViewPost', 'PostController@adminViewPost')->name('adminViewPost');
+Route::get('/admin/editPost/{id}', 'PostController@editPost')->name('editPost');
+Route::get('/admin/deletePost/{id}', 'PostController@deletePost')->name('deletePost');
+Route::post('/admin/updatePost/{id}', 'PostController@updatePost')->name('updatePost');
 
-Route::get('/adminViewGallery', 'AdminController@adminViewGallery')->name('adminViewGallery');
-Route::get('/deleteGalleryImage/{id}', 'AdminController@deleteGalleryImage')->name('deleteGalleryImage');
 
 //image galary
-Route::get('imageGallery', 'AdminController@imageGallery')->name('imageGallery');
-Route::post('image/upload/store','AdminController@fileStore');
-Route::post('image/delete','AdminController@fileDestroy');
+Route::get('imageGallery', 'ImageGalleryController@imageGallery')->name('imageGallery');
+Route::post('image/upload/store','ImageGalleryController@fileStore');
+Route::post('image/delete','ImageGalleryController@fileDestroy');
 
+Route::get('/adminViewGallery', 'ImageGalleryController@adminViewGallery')->name('adminViewGallery');
+Route::get('/deleteGalleryImage/{id}', 'ImageGalleryController@deleteGalleryImage')->name('deleteGalleryImage');
+
+//event
+Route::get('/event/add', 'EventController@viewEvent')->name('event');
+Route::post('/addEvent', 'EventController@addEvent')->name('addEvent');
+Route::get('/admin/ViewEvent', 'EventController@adminViewEvent')->name('adminViewEvent');
+Route::get('/admin/editEvent/{id}', 'EventController@editEvent')->name('editEvent');
+Route::get('/admin/deleteEvent/{id}', 'EventController@deleteEvent')->name('deleteEvent');
+Route::post('/admin/updateEvent/{id}', 'EventController@updateEvent')->name('updateEvent');
 
 // Auth::routes();
 

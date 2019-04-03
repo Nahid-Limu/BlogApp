@@ -101,13 +101,14 @@
     </span>
 
 
-  <h1 class="my-4 alert-success">Welcome To RYDOBD.com
+  {{--  <h1 class="my-4 alert-success">Welcome To RYDOBD.com
       <span class="pull-right">{{ $today->day.' '.$today->format('F').' '.$today->year }}</span>
-  </h1>
+  </h1>  --}}
 
   {{--  Our Free Volunteer Services  --}}
   <div class="jumbotron bg-light">
-    <h2 class="text-center">Our Free Volunteer Services</h2>
+    <h2 class="text-center" style="font-family:Georgia, 'Times New Roman', Times, serif"><b>Our Free Volunteer Services</b></h2>
+    <br><hr>
     <div class="row">
 
       <div class="col-md-4">
@@ -194,6 +195,7 @@
       </div>
     
   </div>
+  <hr>
   {{--  Our Free Volunteer Services  --}}
 
   {{--  Post  --}}

@@ -29,7 +29,7 @@
         <hr>
 
         <!-- Preview Image -->
-        <img class="img-fluid rounded" src="{{ asset('images').'/'.$post->image }}" alt="" style="width: 100%; height: 30%;" >
+        <img class="img-fluid rounded" src="{{ asset('images').'/'.$post->image }}" alt="" style="width: 100%; height: 300px;" >
 
         <hr>
 

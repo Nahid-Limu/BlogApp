@@ -9,7 +9,7 @@ use App\Post;
 use App\User;
 use App\ImageUpload;
 use Auth;
-use Intervention\Image\ImageManagerStatic as Image;
+use Image;
 
 class PostController extends Controller
 {
@@ -40,12 +40,9 @@ class PostController extends Controller
 
 
         $image = $request->file('image');
-
-        $filename =  ($image->getClientOriginalName());
-
+        $filename    = time().'-'.$image->getClientOriginalName();
         $path = public_path('images/' . $filename);
-
-        Image::make($image->getRealPath())->resize(300, 300)->save($path);
+        Image::make($image->getRealPath())->resize(600, 600)->save($path);
 
 
 

@@ -61,6 +61,10 @@ Route::get('/admin/editEvent/{id}', 'EventController@editEvent')->name('editEven
 Route::get('/admin/deleteEvent/{id}', 'EventController@deleteEvent')->name('deleteEvent');
 Route::post('/admin/updateEvent/{id}', 'EventController@updateEvent')->name('updateEvent');
 
+//Moto
+Route::get('admin/ViewMoto', 'PostController@viewMoto')->name('moto');
+Route::post('admin/moto', 'PostController@addMoto')->name('addMoto');
+
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

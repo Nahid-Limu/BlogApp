@@ -114,6 +114,13 @@
                             </a>
                             
                         </li>
+                        <li class="sidebar-dropdown">
+                            <a href=" {{ route('moto') }} ">
+                                <i class="fas fa-sync"></i>
+                                <span>Update Moto</span>
+                            </a>
+                            
+                        </li>
                         
                         
                         <li class="header-menu">

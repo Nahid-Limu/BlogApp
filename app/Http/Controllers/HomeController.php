@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Event;
 use App\ImageUpload;
+use DB;
 class HomeController extends Controller
 {
     /**
@@ -26,8 +27,9 @@ class HomeController extends Controller
     public function home()
     {
         $posts = Post::orderBy('id', 'DESC')->paginate(6);
+        $moto = DB::table('mototext')->first();
 
-        return view('home')->with('posts',$posts);
+        return view('home')->with('posts',$posts)->with('moto',$moto);
     }
 
 

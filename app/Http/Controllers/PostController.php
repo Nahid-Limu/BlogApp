@@ -10,6 +10,7 @@ use App\User;
 use App\ImageUpload;
 use Auth;
 use Image;
+use DB;
 
 class PostController extends Controller
 {
@@ -98,5 +99,22 @@ class PostController extends Controller
         $post->save();
 
         return Redirect::back()->with('message', 'Post Update Successfully');
+    }
+
+    //Moto
+    public function viewMoto()
+    {
+        $moto = DB::table('mototext')->first();
+        return view('admin.addMoto', compact('moto'));
+    }
+
+    public function addMoto(Request $request)
+    {
+        //$moto = DB::table('mototext')->first();
+        $moto = DB::table('mototext')
+            ->where('id', $request->id)
+            ->update(['moto' => $request->addmoto]);
+
+        return Redirect::back()->with('message', 'Moto Update Successfully');
     }
 }

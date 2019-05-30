@@ -97,7 +97,7 @@
     @endphp
   
     <span  class="d-flex justify-content-center badge bg-info text-danger">
-      <marquee style="font-size: 20px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;">RYDOBD The Voice Of Panchagarh. Time: {{ date('h:i A')}}</marquee>  
+      <marquee style="font-size: 20px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;">{{$moto->moto}} Time: {{ date('h:i A')}}</marquee>  
     </span>
 
 

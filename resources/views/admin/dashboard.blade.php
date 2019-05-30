@@ -4,25 +4,25 @@
 
 @section('content')
 
-<div class="jumbotron">
+<div class="">
         @if(Session::has('message'))
         <div id="successMessage" class="alert alert-dismissible alert-success" style="display: inline-block; float: right; ">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong> {{ Session::get('message') }} </strong>
         </div>
         @endif
-
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Overview</li>
+        </ol>
         <div id="content-wrapper">
 
                 <div class="container-fluid">
           
-                  <!-- Breadcrumbs-->
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <a href="#">Dashboard</a>
-                    </li>
-                    <li class="breadcrumb-item active">Overview</li>
-                  </ol>
+                  
           
                   <!-- Icon Cards-->
                   <div class="row">

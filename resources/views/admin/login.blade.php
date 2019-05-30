@@ -8,12 +8,7 @@
   <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 </head>
 <body>
-    @if(Session::has('message'))
-    <div id="successMessage" class="alert alert-dismissible alert-success" style="display: inline-block; float: right; ">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong> {{ Session::get('message') }} </strong>
-    </div>
-    @endif
+    
 <div class="login-page">  
 <div class="panda">
   <div class="ear"></div>
@@ -49,7 +44,10 @@
   <div class="form-group">
     <input class="form-control" type="password" name="password" id="password" required="required" />
     <label class="form-label">Password</label>
+    @if(Session::has('message'))
     <p class="alert">Invalid Credentials..!!</p>
+    @endif
+    
     <button class="btn">Login </button>
   </div>
 </form>

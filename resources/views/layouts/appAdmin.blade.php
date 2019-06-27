@@ -163,7 +163,7 @@
             <i class="fa fa-cog"></i>
             <span class="badge-sonar"></span>
         </a>
-        <a href="{{ route('logout') }}" title="Logout">
+        <a href="{{ route('logout') }}" data-toggle="tooltip" data-placement="right"  title="Logout">
             <i class="fa fa-power-off"></i>
         </a>
             </div>
@@ -222,6 +222,10 @@
                  
                  
               });
+              
+              $(document).ready(function(){
+                  $('[data-toggle="tooltip"]').tooltip();   
+                });
 
 </script>
 

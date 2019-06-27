@@ -39,7 +39,7 @@
                       
                       <div>
                         <a href="{{ route('editEvent', $event->id)}}" class="btn btn-sm btn-info">Edit</a>
-                        <a href="{{ route('deleteEvent', $event->id)}}" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="{{ route('deleteEvent', $event->id)}}" onclick="return confirm('are you sure to Delete?')" class="btn btn-sm btn-danger">Delete</a>
                       </div>
                     </div>
               </div>

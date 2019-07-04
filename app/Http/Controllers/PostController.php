@@ -9,8 +9,9 @@ use App\Post;
 use App\User;
 use App\ImageUpload;
 use Auth;
-use Image;
+use Intervention\Image\Facades\Image as Image;
 use DB;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -22,41 +23,56 @@ class PostController extends Controller
     public function addPost(Request $request)
     {
        //return $request->all();
-       $post = new Post;
+       if ($request->hasFile('image')) {
+           $post = new Post;
 
-       $postTitle = $request->postTitle;
-       $postDescription = $request->postDescription;
+            $postTitle = $request->postTitle;
+            $postDescription = $request->postDescription;
 
-        //$imageName = time().'.'.request()->image->getClientOriginalExtension();
-        //    $imageName = time().'-'.request()->image->getClientOriginalName();
-        //    request()->image->move(public_path('images'), $imageName);
-
-
-        // $image       = $request->file('image');
-        // $filename    = time().'-'.$image->getClientOriginalName();
-
-        // $image_resize = Image::make($image->getRealPath());              
-        // $image_resize->resize(300, 300);
-        // $image_resize->save(public_path('images/' .$filename));
+                //$imageName = time().'.'.request()->image->getClientOriginalExtension();
+                //    $imageName = time().'-'.request()->image->getClientOriginalName();
+                //    request()->image->move(public_path('images'), $imageName);
 
 
-        $image = $request->file('image');
-        $filename    = time().'-'.$image->getClientOriginalName();
-        $path = public_path('images/' . $filename);
-        Image::make($image->getRealPath())->resize(600, 600)->save($path);
+                // $image       = $request->file('image');
+                // $filename    = time().'-'.$image->getClientOriginalName();
+
+                // $image_resize = Image::make($image->getRealPath());
+                // $image_resize->resize(300, 300);
+                // $image_resize->save(public_path('images/' .$filename));
 
 
+                $image = $request->file('image');
 
-       //echo $imageName;
+                $filename    = time().'-'.$image->getClientOriginalName();
+                $path = public_path('images/' . $filename);
+                Image::make($image->getRealPath())->resize(600, 600)->save($path);
 
-       $post->post_title = $postTitle;
-       $post->post_description = $postDescription;
-       $post->image = $filename;
+                // $imageName = $image->getClientOriginalName();
+                // $image->move(public_path('images'),$imageName);
 
-       $post->save();
 
-       return back()->with('message','Post Add successfully.');
-       
+            //echo $imageName;
+
+            $post->post_title = $postTitle;
+            $post->post_description = $postDescription;
+            $post->image = $filename;
+
+            $post->save();
+            return back()->with('message','Post has been successfully added.');
+       } else {
+           $post = new Post;
+
+            $postTitle = $request->postTitle;
+            $postDescription = $request->postDescription;
+
+            $post->post_title = $postTitle;
+            $post->post_description = $postDescription;
+
+            $post->save();
+            return back()->with('message','Post has been successfully added.');
+       }
+
     }
 
 
@@ -66,21 +82,27 @@ class PostController extends Controller
         //echo $value = str_limit('$post->post_description', 7);
         //dd($posts);
         return view('admin.adminViewPost')->with('posts',$posts);
-    
+
     }
 
     public function deletePost($id)
     {
         $post = Post::find($id);
+        $image=$post->image;
+        if($image!=null){
+            $path = public_path() . "/images/" . $image;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+        }
+        
         if ($post) {
-            $image_path = public_path().'/images/'.$post->image;
-            unlink($image_path);
             $post->delete();
             return Redirect::back()->with('message', 'Post Delete Successfully....!!!');
         } else {
             return Redirect::back()->with('message', 'Post not found');
         }
-        
+
     }
 
     public function editPost($id)
@@ -88,17 +110,52 @@ class PostController extends Controller
         $post = Post::find($id);
         //dd($post);
         return view('admin.editPost', compact('post'));
-        
+
     }
 
     public function updatePost(Request $request,$id)
     {
-        $post = Post::find($id);
-        $post->post_title = $request->postTitle;
-        $post->post_description = $request->postDescription;
-        $post->save();
+        if ($request->hasFile('image')) {
+            //unlink existing file
+            $post =Post::find($id);
+            $image=$post->image;
+            if($image!=null){
+                $path = base_path() . "/images/" . $image;
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+           
+            //$post = Post::find($id);
+            $postTitle = $request->postTitle;
+            $postDescription = $request->postDescription;
+            $image = $request->file('image');
 
-        return Redirect::back()->with('message', 'Post Update Successfully');
+            $filename    = time().'-'.$image->getClientOriginalName();
+            $path = public_path('images/' . $filename);
+            Image::make($image->getRealPath())->resize(600, 600)->save($path);
+
+            // $imageName = $image->getClientOriginalName();
+            // $image->move(public_path('images'),$imageName);
+
+
+            //echo $imageName;
+
+            $post->post_title = $postTitle;
+            $post->post_description = $postDescription;
+            $post->image = $filename;
+
+            $post->save();
+            return back()->with('message','Post has been successfully updated.');
+       } else {
+            $post = Post::find($id);
+            $post->post_title = $request->postTitle;
+            $post->post_description = $request->postDescription;
+            $post->save();
+
+            return back()->with('message','Post has been successfully updated.');
+       }
+        
     }
 
     //Moto
@@ -112,8 +169,14 @@ class PostController extends Controller
     {
         //$moto = DB::table('mototext')->first();
         $moto = DB::table('mototext')
-            ->where('id', $request->id)
-            ->update(['moto' => $request->addmoto]);
+            ->updateOrInsert(
+                ['id' => $request->id],//this use as where
+                [
+                    'moto' => $request->addmoto,
+                    'created_at'=>Carbon::now()->toDateTimeString(),
+                    'updated_at'=>Carbon::now()->toDateTimeString()
+                ]
+            );
 
         return Redirect::back()->with('message', 'Moto Update Successfully');
     }

@@ -23,34 +23,49 @@ class EventController extends Controller
 
     public function addEvent(Request $request)
     {
-       //return $request->all();
-       $event = new Event;
-       
-       $eventTitle = $request->eventTitle;
-       $eventDate = $request->eventDate;
-       $eventDescription = $request->eventDescription;
+        if ($request->hasFile('image')) {
+            $event = new Event;
 
-        $image = $request->file('image');
+            $eventTitle = $request->eventTitle;
+            $eventDate = $request->eventDate;
+            $eventDescription = $request->eventDescription;
 
-        $filename =  ($image->getClientOriginalName());
+                $image = $request->file('image');
 
-        $path = public_path('images/' . $filename);
+                $filename    = time().'-'.$image->getClientOriginalName();
+                $path = public_path('images/' . $filename);
+                Image::make($image->getRealPath())->resize(300, 300)->save($path);
 
-        Image::make($image->getRealPath())->resize(300, 300)->save($path);
+
+            //echo $imageName;
+
+            $event->event_title = $eventTitle;
+            $event->event_date = $eventDate;
+            $event->event_description = $eventDescription;
+            $event->image = $filename;
+
+            $event->save();
+
+            return back()->with('message','Event successfully Added.');
+        } else {
+            $event = new Event;
+
+            $eventTitle = $request->eventTitle;
+            $eventDate = $request->eventDate;
+            $eventDescription = $request->eventDescription;
+
+
+            $event->event_title = $eventTitle;
+            $event->event_date = $eventDate;
+            $event->event_description = $eventDescription;
+            $event->save();
+
+            return back()->with('message','Event successfully Added.');
+        }
         
-
-
-       //echo $imageName;
-
-       $event->event_title = $eventTitle;
-       $event->event_date = $eventDate;
-       $event->event_description = $eventDescription;
-       $event->image = $filename;
-
-       $event->save();
-
-       return back()->with('message','Event Add successfully.');
+       //return $request->all();
        
+
     }
 
 
@@ -60,19 +75,26 @@ class EventController extends Controller
         //echo $value = str_limit('$post->post_description', 7);
         //dd($posts);
         return view('admin.adminViewEvent')->with('events',$events);
-    
+
     }
 
     public function deleteEvent($id)
     {
         $event = Event::find($id);
+        $image=$event->image;
+        if($image!=null){
+            $path = base_path() . "/images/" . $image;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+        }
         if ($event) {
             $event->delete();
             return Redirect::back()->with('message', 'Event Delete Successfully....!!!');
         } else {
             return Redirect::back()->with('message', 'Event not found');
         }
-        
+
     }
 
     public function editEvent($id)
@@ -80,17 +102,53 @@ class EventController extends Controller
         $event = Event::find($id);
         //dd($post);
         return view('admin.editEvent', compact('event'));
-        
+
     }
 
     public function updateEvent(Request $request,$id)
     {
-        $event = Event::find($id);
-        $event->event_title = $request->eventTitle;
-        $event->event_date = $request->eventDate;
-        $event->event_description = $request->eventDescription;
-        $event->save();
+        if ($request->hasFile('image')) {
+            $event = Event::find($id);
+            //unlink existing file
+            $image=$event->image;
+            if($image!=null){
+                $path = base_path() . "/images/" . $image;
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+            
+            $eventTitle = $request->eventTitle;
+            $eventDate = $request->eventDate;
+            $eventDescription = $request->eventDescription;
 
-        return Redirect::back()->with('message', 'Event Update Successfully');
+            $image = $request->file('image');
+
+            $filename    = time().'-'.$image->getClientOriginalName();
+            $path = public_path('images/' . $filename);
+            Image::make($image->getRealPath())->resize(300, 300)->save($path);
+
+
+
+            //echo $imageName;
+
+            $event->event_title = $eventTitle;
+            $event->event_date = $eventDate;
+            $event->event_description = $eventDescription;
+            $event->image = $filename;
+
+            $event->save();
+
+            return Redirect::back()->with('message', 'Event Successfully Updated');
+        } else {
+            $event = Event::find($id);
+            $event->event_title = $request->eventTitle;
+            $event->event_date = $request->eventDate;
+            $event->event_description = $request->eventDescription;
+            $event->save();
+
+            return Redirect::back()->with('message', 'Event Successfully Updated');
+        }
+        
     }
 }

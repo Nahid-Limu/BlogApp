@@ -1,15 +1,22 @@
-@if (Session::has('userId'))
-
 @extends('layouts.appAdmin')
+@section('title', 'Event')
 @section('content')
-
+<!--Flash Message Start-->
+<script src="{{ asset('js/sweetalert.min.js') }}"></script>
+@if(Session::has('message'))
+<script>
+    var msg =' <?php echo Session::get('message');?>'
+    swal(msg, "", "success");
+</script>
+@endif
+<!--Flash Message End-->
 <div class="container ">
-        @if(Session::has('message'))
+        {{-- @if(Session::has('message'))
         <div id="successMessage" class="alert alert-dismissible alert-success" style="display: inline-block; float: right; ">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong> {{ Session::get('message') }} </strong>
         </div>
-        @endif
+        @endif --}}
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href=" {{ route('dashboard') }} ">Dashboard</a>
@@ -65,7 +72,7 @@
         </div>
     
 </div>
-@include('includes.footer')
+
 @endsection
 
 @section('script')
@@ -79,7 +86,3 @@
             });
     </script>
 @endsection
-
-@else
-<script>window.location = "/admin";</script>
-@endif

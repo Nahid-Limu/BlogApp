@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Contact Us')
 @section('css')
 <link href="{{ asset('css/contuct-main.css') }}" rel="stylesheet">
 @endsection

@@ -23,7 +23,7 @@ class ImageGalleryController extends Controller
     {
         $image = $request->file('file');
         $imageName = $image->getClientOriginalName();
-        $image->move(public_path('images'),$imageName);
+        $image->move(base_path('images'),$imageName);
         
         $imageUpload = new ImageUpload();
         $imageUpload->image = $imageName;
@@ -34,7 +34,7 @@ class ImageGalleryController extends Controller
     {
         $filename =  $request->get('filename');
         ImageUpload::where('image',$filename)->delete();
-        $path=public_path().'/images/'.$filename;
+        $path=base_path().'/images/'.$filename;
         if (file_exists($path)) {
             unlink($path);
         }
@@ -56,6 +56,8 @@ class ImageGalleryController extends Controller
     {
         $gallery = ImageUpload::find($id);
         if ($gallery) {
+            $image_path = base_path().'/images/'.$gallery->image;
+            unlink($image_path);
             $gallery->delete();
             return Redirect::back()->with('message', 'Post Delete Successfully....!!!');
         } else {

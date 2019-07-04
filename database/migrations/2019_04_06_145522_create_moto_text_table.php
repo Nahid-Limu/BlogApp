@@ -15,7 +15,7 @@ class CreateMotoTextTable extends Migration
     {
         Schema::create('motoText', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('moto');
+            $table->string('moto')->nullable();;
             $table->timestamps();
         });
     }

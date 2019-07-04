@@ -1,6 +1,5 @@
-@if (Session::has('userId'))
-
 @extends('layouts.appAdmin')
+@section('title', 'Edit Gallery')
 @section('css')
 
 @endsection
@@ -12,12 +11,22 @@
     <li class="breadcrumb-item active">Edit Gallery</li>
 </ol>
 <div class="container">
-        @if(Session::has('message'))
+        {{-- @if(Session::has('message'))
         <div id="successMessage" class="alert alert-dismissible alert-success" style="display: inline-block; float: right; ">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong> {{ Session::get('message') }} </strong>
         </div>
+        @endif --}}
+        
+        <!--Flash Message Start-->
+        <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+        @if(Session::has('message'))
+        <script>
+            var msg =' <?php echo Session::get('message');?>'
+            swal(msg, "", "success");
+        </script>
         @endif
+        <!--Flash Message End-->
         
         <!-- Page Content -->
         <section class="gallery-block grid-gallery">
@@ -32,7 +41,7 @@
                         <img class="img-fluid image scale-on-hover" src="{{ asset('images').'/'.$image->image }}" style="width: 300px; height: 300px;">
                     </a>
                     <div>
-                        <a href="{{ route('deleteGalleryImage', $image->id) }}" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="{{ route('deleteGalleryImage', $image->id) }}" onclick="return confirm('are you sure to Delete?')" class="btn btn-sm btn-danger">Delete</a>
 
                     </div>
                 </div>
@@ -48,7 +57,6 @@
               {{ $gallery->links() }}
           </div>
 </div>
-@include('includes.footer')
 @endsection
 
 @section('script')
@@ -65,7 +73,3 @@
             });
     </script>
 @endsection
-
-@else
-<script>window.location = "/admin";</script>
-@endif

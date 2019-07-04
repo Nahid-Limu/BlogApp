@@ -1,15 +1,23 @@
-@if (Session::has('userId'))
-
 @extends('layouts.appAdmin')
+@section('title', 'Moto')
 @section('content')
 
-<div class="container ">
-        @if(Session::has('message'))
+<div class="container">
+        {{-- @if(Session::has('message'))
         <div id="successMessage" class="alert alert-dismissible alert-success" style="display: inline-block; float: right; ">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong> {{ Session::get('message') }} </strong>
         </div>
-        @endif
+        @endif --}}
+<!--Flash Message Start-->
+<script src="{{ asset('js/sweetalert.min.js') }}"></script>
+@if(Session::has('message'))
+<script>
+    var msg =' <?php echo Session::get('message');?>'
+    swal(msg, "", "success");
+</script>
+@endif
+<!--Flash Message End-->
         
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -29,22 +37,23 @@
                     <div class="form-row">
                         <div class="name">Add Moto</div>
                         <div class="value">
-                            <input type="hidden" name="id" value="{{$moto->id}}">
+                            <input type="hidden" name="id" value="{{empty($moto->id) ? "" : "$moto->id" }}">
                             <div class="input-group">
-                                <textarea class="textarea--style-6" name="addmoto" placeholder="Add Moto">{{$moto->moto}}</textarea>
+                                <textarea class="textarea--style-6" name="addmoto" placeholder="Add Moto">{{empty($moto->moto) ? "" : "$moto->moto" }}</textarea>
                             </div>
                         </div>
                     </div>
                 
             </div>
             <div class="card-footer">
-                <button class="btn btn--radius-2 btn--blue-2" type="submit"><i class="fas fa-sync"></i> Update Moto</button>
+                <button class="btn btn--radius-2 btn--blue-2" type="submit"><i class="fas fa-sync"></i>{{empty($moto->moto) ? " Add Moto" : " Update Moto" }}</button>
             </div>
             </form>
         </div>
     
 </div>
-@include('includes.footer')
+<br>
+<br>
 @endsection
 
 @section('script')
@@ -58,7 +67,3 @@
             });
     </script>
 @endsection
-
-@else
-<script>window.location = "/admin";</script>
-@endif

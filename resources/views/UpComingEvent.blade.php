@@ -1,4 +1,5 @@
 @extends('layouts.app') 
+@section('title', 'Event')
 @section('content')
 
 @include('includes.nav')
@@ -69,6 +70,15 @@
                 <button class="btn btn-secondary" type="button">Go!</button>
               </span>
             </div>
+          </div>
+        </div>
+        
+        <!-- visitor Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Visitor Details</h5>
+          <div class="card-body">
+            <a href='https://freehitcounters.org/'>FreeHitcounters.org</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=ce78ec242005420c7c6e3f38326bd898cb2793d6'></script>
+            <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/512989/t/0"></script>
           </div>
         </div>
 

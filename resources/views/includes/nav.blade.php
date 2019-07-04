@@ -1,7 +1,7 @@
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="/" style="font-family: Curlz MT; font-size: 30px; color: red;">
+      <a class="navbar-brand" href="{{route('home')}}" style="font-size: 30px; color: red;">
         <img class="card-img-top" src=" {{ asset('img').'/'.'logo.png' }} " alt="no image found" style="width: 50px; height:50px;">
         <b>RYDOBD</b>
       </a>
@@ -11,7 +11,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-              <a class="nav-link" href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+              <a class="nav-link" href="{{route('home')}}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href=" {{ route('UpComingevents') }} "><i class="fa fa-calendar" aria-hidden="true"></i> UpComming Event</a>
@@ -25,10 +25,9 @@
           <li class="nav-item">
             <a class="nav-link" href=" {{ route('about') }} "><i class="fa fa-info-circle" aria-hidden="true"></i> About</a>
           </li>
-          
+
         </ul>
       </div>
     </div>
   </nav>
 
-  

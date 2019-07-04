@@ -1,7 +1,5 @@
-@if (Session::has('userId'))
-
 @extends('layouts.appAdmin') 
-    
+@section('title', 'All Event')
 @section('content')
 
 <ol class="breadcrumb">
@@ -55,7 +53,6 @@
       </div>
     
     </div>
-    @include('includes.footer')
 @endsection
 
 @section('script')
@@ -69,7 +66,3 @@
             });
     </script>
 @endsection
-
-@else
-<script>window.location = "/admin";</script>
-@endif

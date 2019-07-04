@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'About Us')
 @section('css')
 
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>

@@ -1,6 +1,5 @@
-@if (Session::has('userId'))
-
 @extends('layouts.appAdmin')
+@section('title', 'Edit Event')
 @section('content')
 <ol class="breadcrumb">
     <li class="breadcrumb-item">
@@ -9,12 +8,21 @@
     <li class="breadcrumb-item active">Edit Event</li>
 </ol>
 <div class="">
-        @if(Session::has('message'))
+        {{-- @if(Session::has('message'))
         <div id="successMessage" class="alert alert-dismissible alert-success" style="display: inline-block; float: right; ">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong> {{ Session::get('message') }} </strong>
         </div>
-        @endif
+        @endif --}}
+<!--Flash Message Start-->
+<script src="{{ asset('js/sweetalert.min.js') }}"></script>
+@if(Session::has('message'))
+<script>
+    var msg =' <?php echo Session::get('message');?>'
+    swal(msg, "", "success");
+</script>
+@endif
+<!--Flash Message End-->
 
     <div class="card card-6 border-info">
         <div class="card-heading bg-info">
@@ -44,6 +52,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="name">Upload Image</div>
+                    <div class="value">
+                        <div class="input-group js-input-file">
+                            <input class="input-file" type="file" name="image" id="file">
+                            <label class="label--file" for="file">Choose file</label>
+                            <span class="input-file__info">No file chosen</span>
+                        </div>
+                        {{--  <div class="label--desc">Upload your CV/Resume or any other relevant file. Max file size 50 MB</div>  --}}
+                    </div>
+                </div>
 
             
         </div>
@@ -54,7 +73,6 @@
     </div>
 
 </div>
-@include('includes.footer')
 @endsection
 
 @section('script')
@@ -68,7 +86,3 @@
             });
     </script>
 @endsection
-
-@else
-<script>window.location = "/admin";</script>
-@endif

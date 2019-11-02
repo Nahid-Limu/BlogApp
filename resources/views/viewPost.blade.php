@@ -7,6 +7,9 @@
   hr.new2 {
     border-top: 1px dashed red;
   }
+  li {
+    list-style-type: none;
+}
 </style>
 
 @endsection
@@ -46,16 +49,34 @@
       <!-- Post Content -->
       <p class="lead">{{$post->post_description}}</p>
       <hr>
-      <div class="bg-dark footer">
 
-        <span class="">
-          <span class="text-info" style="font-size: 30px;">Share This Post -> </span>
-            <a href="" class="pull-right" target="_blank" style="text-decoration: none;"><i class="fa fa-round fa-twitter"></i></a>
-            <a href="" class="pull-right" target="_blank" style="text-decoration: none;"><i class="fa fa-round fa-linkedin"></i></a>
-            <a href="" class="pull-right" target="_blank" style="text-decoration: none;"><i class="fa fa-round fa-facebook"></i></a>
-      
-        </span>
-    </div>
+      {{--  <div id="social-links">
+          <ul>
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://jorenvanhocht.be" class="social-button " id=""><span class="fa fa-facebook-official">face</span></a></li>
+            <li><a href="https://twitter.com/intent/tweet?text=my share text&amp;url=http://jorenvanhocht.be" class="social-button " id=""><span class="fa fa-twitter"></span></a></li>
+            <li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://jorenvanhocht.be&amp;title=my share text&amp;summary=dit is de linkedin summary" class="social-button " id=""><span class="fa fa-linkedin"></span></a></li>
+            <li><a href="https://wa.me/?text=http://jorenvanhocht.be" class="social-button " id=""><span class="fa fa-whatsapp"></span></a></li>    
+          </ul>
+      </div>  --}}
+      <?php
+      $url=request()->url();
+      ?>
+      <div class="footer">
+          <p class="text-info text-center" style="font-size: 30px;">................Share This Post................</p>
+        
+          <div class="row bg-dark ">
+            <div class="col-md-4" style="margin-top: 10px;">
+                {!!Share::page("{{ route('$url')}}",$post->post_title)->facebook();!!}
+            </div>
+            <div class="col-md-4" style="margin-top: 10px;">
+                {!!Share::page("{{ route('$url')}}", 'Your share text can be placed here')->twitter();!!}
+            </div>
+            <div class="col-md-4" style="margin-top: 10px;">
+                {!!Share::page("{{ route('$url')}}", 'Share title')->linkedin();!!} 
+            </div>
+          </div>
+   
+      </div>
       <hr>
 
       <!-- Comments Form -->

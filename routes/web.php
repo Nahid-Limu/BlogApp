@@ -32,6 +32,7 @@ Auth::routes();
 /* Logout route start */
 Route::get('/logout', 'Auth\LoginController@logout');
 /* Logout route end */
+
 Route::group(['middleware'=>'auth'], function () {
 
     //Route::get('/home', 'HomeController@index')->name('home');

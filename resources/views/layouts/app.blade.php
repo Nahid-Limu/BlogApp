@@ -61,19 +61,18 @@
 <footer class="bg-dark">
 
     <!-- /.container -->
-    <div class="footer">
+    {{--  <div class="footer">
 
+        
+    </div>  --}}
+    <div class="container text-center">
         <span>
             <a href="https://www.facebook.com/groups/489402054899329/" target="_blank" style="text-decoration: none;"><i
                     class="fa fa-round fa-facebook"></i></a>
             <a href="" target="_blank" style="text-decoration: none;"><i class="fa fa-round fa-twitter"></i></a>
             <a href="" target="_blank" style="text-decoration: none;"><i class="fa fa-round fa-youtube"></i></a>
             <a href="" target="_blank" style="text-decoration: none;"><i class="fa fa-round fa-linkedin"></i></a>
-
         </span>
-    </div>
-    <div class="container text-center background">
-
     </div>
     <div class="container">
         <p class="m-0 text-center text-white">&copy; Copyright 2019 Developed by --Nahid Limu-- All Rights Reserved. <a

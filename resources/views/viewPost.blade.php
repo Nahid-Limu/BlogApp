@@ -66,13 +66,13 @@
         
           <div class="row bg-dark ">
             <div class="col-md-4" style="margin-top: 10px;">
-                {!!Share::page("{{ route('$url')}}",$post->post_title)->facebook();!!}
+                {!!Share::page($url,$post->post_title)->facebook();!!}
             </div>
             <div class="col-md-4" style="margin-top: 10px;">
-                {!!Share::page("{{ route('$url')}}", 'Your share text can be placed here')->twitter();!!}
+                {!!Share::page($url,$post->post_title)->twitter();!!}
             </div>
             <div class="col-md-4" style="margin-top: 10px;">
-                {!!Share::page("{{ route('$url')}}", 'Share title')->linkedin();!!} 
+                {!!Share::page($url,$post->post_title)->linkedin()!!} 
             </div>
           </div>
    
